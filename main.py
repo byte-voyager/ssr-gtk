@@ -2,7 +2,6 @@
 import gi
 import os
 import signal
-import time
 import threading
 import subprocess
 import builtins
