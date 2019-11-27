@@ -21,4 +21,7 @@ chmod +x ./uninstall.sh
 ./uninstall.sh
 ```
 
+#### 节点配置文件
+默认会将配置文件的读写放在`~/.config/ssr-gtk/ssr`文件夹下 可以将自己的配置文件放置此目录 注意在每一次设置的时候都会清空此文件夹
+
 ![界面](https://raw.githubusercontent.com/Baloneo/ssr-gtk/master/01.png)
