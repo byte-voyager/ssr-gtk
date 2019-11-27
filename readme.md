@@ -6,8 +6,16 @@
 
 ## 安装使用
 #### 安装
+确保系统环境安装了`appindicator3`
+在apt包管理工具的Linux发行版可以使用以下命令安装
 ```
-cd THIS_PROJECT
+sudo apt install gir1.2-appindicator3-0.1
+```
+
+
+```
+git clone https://github.com/Baloneo/ssr-gtk.git
+cd ssr-git
 chmod +x ./install.sh
 ./install.sh
 ```
@@ -16,7 +24,8 @@ chmod +x ./install.sh
 #### 卸载
 退出软件,执行下面命令
 ```
-cd THIS_PROJECT
+git clone https://github.com/Baloneo/ssr-gtk.git
+cd ssr-git
 chmod +x ./uninstall.sh
 ./uninstall.sh
 ```
