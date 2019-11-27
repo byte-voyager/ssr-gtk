@@ -21,3 +21,4 @@ chmod +x ./uninstall.sh
 ./uninstall.sh
 ```
 
+![界面](https://raw.githubusercontent.com/Baloneo/ssr-gtk/master/01.png)
