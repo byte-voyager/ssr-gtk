@@ -15,7 +15,7 @@ sudo apt install gir1.2-appindicator3-0.1
 
 ```
 git clone https://github.com/Baloneo/ssr-gtk.git
-cd ssr-git
+cd ssr-gtk
 chmod +x ./install.sh
 ./install.sh
 ```
@@ -25,7 +25,7 @@ chmod +x ./install.sh
 退出软件,执行下面命令
 ```
 git clone https://github.com/Baloneo/ssr-gtk.git
-cd ssr-git
+cd ssr-gtk
 chmod +x ./uninstall.sh
 ./uninstall.sh
 ```
