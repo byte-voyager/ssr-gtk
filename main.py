@@ -205,7 +205,9 @@ class SettingWindow(Gtk.Window):
 
         self.entry = Gtk.Entry()
         with open(os.path.join(HOME, ".config/ssr-gtk/config.txt"), "a+") as f:
+            f.seek(0)
             old_url = f.readline()
+            print("old_url", old_url)
         self.entry.set_text(old_url or "设置ssr订阅地址")
         self.vbox.pack_start(self.entry, False, False, 0)
 
