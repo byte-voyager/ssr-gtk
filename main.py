@@ -162,6 +162,7 @@ class SSR(object):
 
     @staticmethod
     def start_ssr(ssr_name, cb_show_msg, cb_stop):
+        """在子线程中启动ssr进程"""
         if STATE['CUR_SSR_PROC_ID'] != -1:
             print('ssr已经在运行')
             return
@@ -169,7 +170,6 @@ class SSR(object):
 
         def run(name):
             print('开始启动 ', name)
-            time.sleep(2)
             p = subprocess.Popen(
                 ["/opt/ssr-gtk/ssr-local", "-c", HOME + "/.config/ssr-gtk/ssr/{}".format(name)],
                 shell=False,
@@ -246,6 +246,8 @@ class AppWindow(Gtk.Window):
         self.on_ssr_stop()
         self.scroll_box.remove(self.listbox)
         self.init_ssr_names()
+
+        self.cur_active_index = -1
         for switch in self.switchs:
             switch.destroy()
         self.switchs.clear()
