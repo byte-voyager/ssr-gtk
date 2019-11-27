@@ -138,9 +138,15 @@ class SSR(object):
             print(e)
 
         # 1 根据url得到base64编码数据
-        web = urllib.request.urlopen(url)
-        web_data = web.read()
-        web_data = web_data.decode("utf-8")
+        try:
+            user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+            headers = {"User-Agent": user_agent}
+            req = urllib.request.Request(url, headers=headers)
+            web = urllib.request.urlopen(req)
+            web_data = web.read()
+            web_data = web_data.decode("utf-8")
+        except Exception as e:
+            return False, str(e)
         # 2 解码
         web_decode_data = SSR.decode_base64(web_data)
         # 3 遍历 保存到文件
@@ -152,6 +158,7 @@ class SSR(object):
             with open(file_abs_name, "w") as f:
                 f.write(json.dumps(json_data, ensure_ascii=False))
                 print(file_name, "已经保存")
+        return True, ""
 
     @staticmethod
     def start_ssr(ssr_name, cb_show_msg, cb_stop):
@@ -193,8 +200,11 @@ class SettingWindow(Gtk.Window):
         url = self.entry.get_text()
         with open(os.path.join(HOME, ".config/ssr-gtk/config.txt"), "w") as f:
             f.write(url)
-            SSR.save_ssr_json_file(url, SSR.JSON_FILES_PATH)
-            self.label_msg.set_text("更新节点列表到本地成功 请关闭当前窗口后刷新节点列表")
+            ok, msg = SSR.save_ssr_json_file(url, SSR.JSON_FILES_PATH)
+            if not ok:
+                self.label_msg.set_text(msg)
+            else:
+                self.label_msg.set_text("更新节点列表到本地成功 请关闭当前窗口后刷新节点列表")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
