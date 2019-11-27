@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=ssr-gtk
+Exec=/opt/ssr-gtk/ssr-gtk
+Icon=/opt/ssr-gtk/logo.png
+Terminal=false
+StartupNotify=false
+Categories=Network;GTK;

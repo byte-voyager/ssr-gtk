@@ -1,0 +1,10 @@
+#!/bin/bash
+
+mkdir -p ~/.config/ssr-gtk/ssr
+
+cp ./logo.png ~/.config/ssr-gtk/
+
+sudo cp ./ssr-local /usr/bin/ssr-local
+sudo cp ./main.py /usr/bin/ssr-gtk
+
+echo "success"
