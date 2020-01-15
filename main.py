@@ -138,11 +138,14 @@ class SSR(object):
 
         # 1 根据url得到base64编码数据
         try:
+            print('start fetch ssr node data')
             user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
             headers = {"User-Agent": user_agent}
             req = urllib.request.Request(url, headers=headers)
-            web = urllib.request.urlopen(req)
+            web = urllib.request.urlopen(req, timeout=10)
+            print('start read ssr node data')
             web_data = web.read()
+            print('start decode ssr node data')
             web_data = web_data.decode("utf-8")
         except Exception as e:
             return False, str(e)
@@ -163,12 +166,12 @@ class SSR(object):
     def start_ssr(ssr_name, cb_show_msg, cb_stop):
         """在子线程中启动ssr进程"""
         if STATE['CUR_SSR_PROC_ID'] != -1:
-            print('ssr已经在运行')
+            print('ssr running')
             return
         cb_show_msg("正在开启ssr {}".format(ssr_name))
 
         def run(name):
-            print('开始启动 ', name)
+            print('start listing file ', name)
             p = subprocess.Popen(
                 ["/opt/ssr-gtk/ssr-local", "-c", HOME + "/.config/ssr-gtk/ssr/{}".format(name)],
                 shell=False,
@@ -365,7 +368,7 @@ class AppWindow(Gtk.Window):
         self.scroll_box.add(self.listbox)
         self.content_box.pack_start(self.scroll_box, True, True, 0)
 
-        self.label = Gtk.Label("ready...", xalign=0.01)
+        self.label = Gtk.Label(label="ready...", xalign=0.01)
         self.content_box.pack_end(self.label, True, True, 0)
 
         if self.cur_active_index != -1:
@@ -410,9 +413,9 @@ def quit_app(*args):
 
 def build_menu(window):
     menu = Gtk.Menu()
-    item_show = Gtk.MenuItem('show main window')
+    item_show = Gtk.MenuItem(label='show main window')
     item_show.connect('activate', show_window, window)
-    item_quit = Gtk.MenuItem('exit')
+    item_quit = Gtk.MenuItem(label='exit')
     item_quit.connect('activate', quit_app)
     menu.append(item_show)
     menu.append(item_quit)
